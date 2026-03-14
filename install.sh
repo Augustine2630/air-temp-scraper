@@ -121,29 +121,29 @@ cat > "$PLIST_FILE" <<EOFPLIST
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.local.$SERVICE_NAME</string>
+    <string>com.local.temp-scraper</string>
 
     <key>ProgramArguments</key>
     <array>
-        <string>$BINARY_PATH</string>
+        <string>/Users/augustine/.local/bin/temp-scraper</string>
     </array>
 
     <key>WorkingDirectory</key>
-    <string>$INSTALL_DIR</string>
+    <string>/Users/augustine/.local/bin</string>
 
     <key>EnvironmentVariables</key>
     <dict>
         <key>TEMP_SCRAPER_PORT</key>
-        <string>$PORT</string>
+        <string>9102</string>
         <key>TEMP_SCRAPER_INTERVAL</key>
-        <string>$INTERVAL</string>
+        <string>30s</string>
     </dict>
 
     <key>StandardOutPath</key>
-    <string>$LOG_DIR/${SERVICE_NAME}.log</string>
+    <string>/tmp/temp-scraper.log</string>
 
     <key>StandardErrorPath</key>
-    <string>$LOG_DIR/${SERVICE_NAME}-error.log</string>
+    <string>/tmp/temp-scraper-error.log</string>
 
     <key>RunAtLoad</key>
     <true/>
