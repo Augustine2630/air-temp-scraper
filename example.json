@@ -1,0 +1,422 @@
+{
+  "ANE MTR Temp Sensor1": {
+    "key": "Sensor1",
+    "type": "hid",
+    "value": "30 °C",
+    "quantity": 30,
+    "unit": "°C"
+  },
+  "Airport": {
+    "key": "TW0P",
+    "type": "flt",
+    "value": "38.03154 °C",
+    "quantity": 38.03154,
+    "unit": "°C"
+  },
+  "Airport 1": {
+    "key": "TW0P",
+    "type": "flt",
+    "value": "38.03154 °C",
+    "quantity": 38.03154,
+    "unit": "°C"
+  },
+  "Battery 1": {
+    "key": "TB1T",
+    "type": "flt",
+    "value": "31.299988 °C",
+    "quantity": 31.299988,
+    "unit": "°C"
+  },
+  "Battery 2": {
+    "key": "TB2T",
+    "type": "flt",
+    "value": "29.299988 °C",
+    "quantity": 29.299988,
+    "unit": "°C"
+  },
+  "Battery 3": {
+    "key": "TB2T",
+    "type": "flt",
+    "value": "29.299988 °C",
+    "quantity": 29.299988,
+    "unit": "°C"
+  },
+  "Drive 0 OOBv3 Max": {
+    "key": "TH0x",
+    "type": "flt",
+    "value": "38.486496 °C",
+    "quantity": 38.486496,
+    "unit": "°C"
+  },
+  "GPU Heatsink 1": {
+    "key": "TG0H",
+    "type": "ioft",
+    "value": "31 °C",
+    "quantity": null,
+    "unit": ""
+  },
+  "GPU MTR Temp Sensor1": {
+    "key": "Sensor1",
+    "type": "hid",
+    "value": "30 °C",
+    "quantity": 30,
+    "unit": "°C"
+  },
+  "GPU MTR Temp Sensor4": {
+    "key": "Sensor4",
+    "type": "hid",
+    "value": "30 °C",
+    "quantity": 30,
+    "unit": "°C"
+  },
+  "ISP MTR Temp Sensor5": {
+    "key": "Sensor5",
+    "type": "hid",
+    "value": "30 °C",
+    "quantity": 30,
+    "unit": "°C"
+  },
+  "NAND": {
+    "key": "TH0x",
+    "type": "flt",
+    "value": "38.486496 °C",
+    "quantity": 38.486496,
+    "unit": "°C"
+  },
+  "NAND CH0 temp": {
+    "key": "temp",
+    "type": "hid",
+    "value": "37 °C",
+    "quantity": 37,
+    "unit": "°C"
+  },
+  "PMGR SOC Die Temp Sensor0": {
+    "key": "Sensor0",
+    "type": "hid",
+    "value": "45.796875 °C",
+    "quantity": 45.796875,
+    "unit": "°C"
+  },
+  "PMGR SOC Die Temp Sensor1": {
+    "key": "Sensor1",
+    "type": "hid",
+    "value": "46.84375 °C",
+    "quantity": 46.84375,
+    "unit": "°C"
+  },
+  "PMGR SOC Die Temp Sensor2": {
+    "key": "Sensor2",
+    "type": "hid",
+    "value": "46.8125 °C",
+    "quantity": 46.8125,
+    "unit": "°C"
+  },
+  "PMU TP3w": {
+    "key": "TP3w",
+    "type": "hid",
+    "value": "49.20073 °C",
+    "quantity": 49.20073,
+    "unit": "°C"
+  },
+  "PMU tcal": {
+    "key": "tcal",
+    "type": "hid",
+    "value": "51.850006 °C",
+    "quantity": 51.850006,
+    "unit": "°C"
+  },
+  "PMU tdev1": {
+    "key": "tdev1",
+    "type": "hid",
+    "value": "21.570587 °C",
+    "quantity": 21.570587,
+    "unit": "°C"
+  },
+  "PMU tdev2": {
+    "key": "tdev2",
+    "type": "hid",
+    "value": "21.5831 °C",
+    "quantity": 21.5831,
+    "unit": "°C"
+  },
+  "PMU tdev3": {
+    "key": "tdev3",
+    "type": "hid",
+    "value": "35.81082 °C",
+    "quantity": 35.81082,
+    "unit": "°C"
+  },
+  "PMU tdev4": {
+    "key": "tdev4",
+    "type": "hid",
+    "value": "38.03154 °C",
+    "quantity": 38.03154,
+    "unit": "°C"
+  },
+  "PMU tdev5": {
+    "key": "tdev5",
+    "type": "hid",
+    "value": "45.34668 °C",
+    "quantity": 45.34668,
+    "unit": "°C"
+  },
+  "PMU tdev6": {
+    "key": "tdev6",
+    "type": "hid",
+    "value": "21.738144 °C",
+    "quantity": 21.738144,
+    "unit": "°C"
+  },
+  "PMU tdev7": {
+    "key": "tdev7",
+    "type": "hid",
+    "value": "38.454956 °C",
+    "quantity": 38.454956,
+    "unit": "°C"
+  },
+  "PMU tdev8": {
+    "key": "tdev8",
+    "type": "hid",
+    "value": "40.04892 °C",
+    "quantity": 40.04892,
+    "unit": "°C"
+  },
+  "PMU tdie1": {
+    "key": "tdie1",
+    "type": "hid",
+    "value": "49.4153 °C",
+    "quantity": 49.4153,
+    "unit": "°C"
+  },
+  "PMU tdie2": {
+    "key": "tdie2",
+    "type": "hid",
+    "value": "48.66429 °C",
+    "quantity": 48.66429,
+    "unit": "°C"
+  },
+  "PMU tdie4": {
+    "key": "tdie4",
+    "type": "hid",
+    "value": "48.235153 °C",
+    "quantity": 48.235153,
+    "unit": "°C"
+  },
+  "PMU tdie5": {
+    "key": "tdie5",
+    "type": "hid",
+    "value": "49.737152 °C",
+    "quantity": 49.737152,
+    "unit": "°C"
+  },
+  "PMU tdie6": {
+    "key": "tdie6",
+    "type": "hid",
+    "value": "48.020584 °C",
+    "quantity": 48.020584,
+    "unit": "°C"
+  },
+  "PMU tdie7": {
+    "key": "tdie7",
+    "type": "hid",
+    "value": "50.16629 °C",
+    "quantity": 50.16629,
+    "unit": "°C"
+  },
+  "PMU tdie8": {
+    "key": "tdie8",
+    "type": "hid",
+    "value": "48.12787 °C",
+    "quantity": 48.12787,
+    "unit": "°C"
+  },
+  "PMU2 tcal": {
+    "key": "tcal",
+    "type": "hid",
+    "value": "51.850006 °C",
+    "quantity": 51.850006,
+    "unit": "°C"
+  },
+  "PMU2 tdev1": {
+    "key": "tdev1",
+    "type": "hid",
+    "value": "21.724548 °C",
+    "quantity": 21.724548,
+    "unit": "°C"
+  },
+  "PMU2 tdev2": {
+    "key": "tdev2",
+    "type": "hid",
+    "value": "38.378387 °C",
+    "quantity": 38.378387,
+    "unit": "°C"
+  },
+  "PMU2 tdev3": {
+    "key": "tdev3",
+    "type": "hid",
+    "value": "21.547668 °C",
+    "quantity": 21.547668,
+    "unit": "°C"
+  },
+  "PMU2 tdev4": {
+    "key": "tdev4",
+    "type": "hid",
+    "value": "45.386673 °C",
+    "quantity": 45.386673,
+    "unit": "°C"
+  },
+  "PMU2 tdev5": {
+    "key": "tdev5",
+    "type": "hid",
+    "value": "37.085587 °C",
+    "quantity": 37.085587,
+    "unit": "°C"
+  },
+  "PMU2 tdie1": {
+    "key": "tdie1",
+    "type": "hid",
+    "value": "49.737152 °C",
+    "quantity": 49.737152,
+    "unit": "°C"
+  },
+  "PMU2 tdie2": {
+    "key": "tdie2",
+    "type": "hid",
+    "value": "49.629868 °C",
+    "quantity": 49.629868,
+    "unit": "°C"
+  },
+  "PMU2 tdie3": {
+    "key": "tdie3",
+    "type": "hid",
+    "value": "51.024567 °C",
+    "quantity": 51.024567,
+    "unit": "°C"
+  },
+  "PMU2 tdie4": {
+    "key": "tdie4",
+    "type": "hid",
+    "value": "51.56099 °C",
+    "quantity": 51.56099,
+    "unit": "°C"
+  },
+  "PMU2 tdie5": {
+    "key": "tdie5",
+    "type": "hid",
+    "value": "49.522583 °C",
+    "quantity": 49.522583,
+    "unit": "°C"
+  },
+  "PMU2 tdie6": {
+    "key": "tdie6",
+    "type": "hid",
+    "value": "51.13185 °C",
+    "quantity": 51.13185,
+    "unit": "°C"
+  },
+  "PMU2 tdie7": {
+    "key": "tdie7",
+    "type": "hid",
+    "value": "51.453705 °C",
+    "quantity": 51.453705,
+    "unit": "°C"
+  },
+  "PMU2 tdie8": {
+    "key": "tdie8",
+    "type": "hid",
+    "value": "51.453705 °C",
+    "quantity": 51.453705,
+    "unit": "°C"
+  },
+  "SOC MTR Temp Sensor0": {
+    "key": "Sensor0",
+    "type": "hid",
+    "value": "43.765625 °C",
+    "quantity": 43.765625,
+    "unit": "°C"
+  },
+  "SOC MTR Temp Sensor1": {
+    "key": "Sensor1",
+    "type": "hid",
+    "value": "47.578125 °C",
+    "quantity": 47.578125,
+    "unit": "°C"
+  },
+  "SOC MTR Temp Sensor2": {
+    "key": "Sensor2",
+    "type": "hid",
+    "value": "47.140625 °C",
+    "quantity": 47.140625,
+    "unit": "°C"
+  },
+  "eACC MTR Temp Sensor0": {
+    "key": "Sensor0",
+    "type": "hid",
+    "value": "46.765625 °C",
+    "quantity": 46.765625,
+    "unit": "°C"
+  },
+  "eACC MTR Temp Sensor3": {
+    "key": "Sensor3",
+    "type": "hid",
+    "value": "46.625 °C",
+    "quantity": 46.625,
+    "unit": "°C"
+  },
+  "gas gauge battery": {
+    "key": "battery",
+    "type": "hid",
+    "value": "31.299988 °C",
+    "quantity": 31.299988,
+    "unit": "°C"
+  },
+  "pACC MTR Temp Sensor2": {
+    "key": "Sensor2",
+    "type": "hid",
+    "value": "48.375 °C",
+    "quantity": 48.375,
+    "unit": "°C"
+  },
+  "pACC MTR Temp Sensor3": {
+    "key": "Sensor3",
+    "type": "hid",
+    "value": "47.6875 °C",
+    "quantity": 47.6875,
+    "unit": "°C"
+  },
+  "pACC MTR Temp Sensor4": {
+    "key": "Sensor4",
+    "type": "hid",
+    "value": "48.3125 °C",
+    "quantity": 48.3125,
+    "unit": "°C"
+  },
+  "pACC MTR Temp Sensor5": {
+    "key": "Sensor5",
+    "type": "hid",
+    "value": "46.328125 °C",
+    "quantity": 46.328125,
+    "unit": "°C"
+  },
+  "pACC MTR Temp Sensor7": {
+    "key": "Sensor7",
+    "type": "hid",
+    "value": "47.03125 °C",
+    "quantity": 47.03125,
+    "unit": "°C"
+  },
+  "pACC MTR Temp Sensor8": {
+    "key": "Sensor8",
+    "type": "hid",
+    "value": "51.953125 °C",
+    "quantity": 51.953125,
+    "unit": "°C"
+  },
+  "pACC MTR Temp Sensor9": {
+    "key": "Sensor9",
+    "type": "hid",
+    "value": "53.0625 °C",
+    "quantity": 53.0625,
+    "unit": "°C"
+  }
+}
