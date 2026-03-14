@@ -3,33 +3,35 @@ package config
 import (
 	"errors"
 	"os"
+	"time"
 )
 
+// Config holds all runtime configuration for the scraper service.
 type Config struct {
 	Port           string
-	ISMCPath       string
-	ScrapeInterval string
+	ScrapeInterval time.Duration
 }
 
+// Load reads configuration from environment variables.
+// Returns an error if any required variable is missing or invalid.
 func Load() (*Config, error) {
 	port := os.Getenv("TEMP_SCRAPER_PORT")
 	if port == "" {
 		return nil, errors.New("required environment variable TEMP_SCRAPER_PORT is not set")
 	}
 
-	ismcPath := os.Getenv("TEMP_SCRAPER_ISMC_PATH")
-	if ismcPath == "" {
-		ismcPath = "/Users/augustine/go/bin/iSMC"
+	intervalStr := os.Getenv("TEMP_SCRAPER_INTERVAL")
+	if intervalStr == "" {
+		intervalStr = "30s"
 	}
 
-	interval := os.Getenv("TEMP_SCRAPER_INTERVAL")
-	if interval == "" {
-		interval = "30s"
+	interval, err := time.ParseDuration(intervalStr)
+	if err != nil {
+		return nil, errors.New("invalid TEMP_SCRAPER_INTERVAL: " + err.Error())
 	}
 
 	return &Config{
 		Port:           port,
-		ISMCPath:       ismcPath,
 		ScrapeInterval: interval,
 	}, nil
 }

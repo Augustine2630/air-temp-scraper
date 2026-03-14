@@ -22,13 +22,14 @@ func main() {
 		log.Fatalf("configuration error: %v", err)
 	}
 
-	interval, err := time.ParseDuration(cfg.ScrapeInterval)
-	if err != nil {
-		log.Fatalf("invalid TEMP_SCRAPER_INTERVAL %q: %v", cfg.ScrapeInterval, err)
-	}
-
 	m := metrics.New()
-	sc := scraper.New(cfg.ISMCPath, m)
+
+	sc, err := scraper.New(m)
+	if err != nil {
+		log.Fatalf("failed to open SMC: %v", err)
+	}
+	defer sc.Close()
+
 	srv := httpserver.New(":"+cfg.Port, m.Registry)
 
 	go func() {
@@ -39,9 +40,10 @@ func main() {
 		}
 	}()
 
+	// Initial scrape immediately on startup.
 	sc.Scrape()
 
-	ticker := time.NewTicker(interval)
+	ticker := time.NewTicker(cfg.ScrapeInterval)
 	defer ticker.Stop()
 
 	stop := make(chan os.Signal, 1)
@@ -53,7 +55,7 @@ func main() {
 			sc.Scrape()
 		case sig := <-stop:
 			log.Printf("received signal %s, shutting down", sig)
-			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+			ctx, cancel := context.WithTimeout(context.Background(), 5*cfg.ScrapeInterval)
 			defer cancel()
 			if err := srv.Shutdown(ctx); err != nil {
 				log.Printf("graceful shutdown error: %v", err)

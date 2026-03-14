@@ -1,30 +1,38 @@
+//go:build darwin
+
 package scraper
 
 import (
-	"bytes"
-	"fmt"
 	"log"
-	"os/exec"
 	"time"
 
 	"github.com/cherepovskiy/air-temp-scraper/internal/metrics"
-	"github.com/cherepovskiy/air-temp-scraper/internal/parser"
+	"github.com/cherepovskiy/air-temp-scraper/internal/smc"
 )
 
-// Scraper runs iSMC and parses its JSON output into Prometheus metrics.
+// Scraper holds a persistent SMC connection and updates Prometheus metrics
+// on each scrape cycle without spawning processes or re-opening the connection.
 type Scraper struct {
-	ismcPath string
-	metrics  *metrics.Metrics
+	reader  *smc.Reader
+	metrics *metrics.Metrics
 }
 
-func New(ismcPath string, m *metrics.Metrics) *Scraper {
-	return &Scraper{
-		ismcPath: ismcPath,
-		metrics:  m,
+// New opens the SMC connection and returns a ready Scraper.
+// Returns an error if the SMC cannot be opened (e.g. non-macOS or no permission).
+func New(m *metrics.Metrics) (*Scraper, error) {
+	r, err := smc.Open()
+	if err != nil {
+		return nil, err
 	}
+	return &Scraper{reader: r, metrics: m}, nil
 }
 
-// Scrape performs one exec-parse cycle and updates all metrics.
+// Close releases the underlying SMC connection.
+func (s *Scraper) Close() {
+	s.reader.Close()
+}
+
+// Scrape performs one read-parse cycle and updates all Prometheus metrics.
 func (s *Scraper) Scrape() {
 	s.metrics.ScrapeTotal.Inc()
 
@@ -44,36 +52,18 @@ func (s *Scraper) Scrape() {
 }
 
 func (s *Scraper) scrapeOnce() error {
-	// #nosec G204 — path comes from trusted config, not user input
-	cmd := exec.Command(s.ismcPath, "temp", "-o", "json")
-
-	var stdout, stderr bytes.Buffer
-	cmd.Stdout = &stdout
-	cmd.Stderr = &stderr
-
-	if err := cmd.Run(); err != nil {
-		return fmt.Errorf("iSMC exec: %w (stderr: %s)", err, stderr.String())
-	}
-
 	parseStart := time.Now()
-	var count float64
 
-	err := parser.Parse(&stdout, func(reading parser.SensorReading) {
-		if reading.Quantity == nil {
-			return
-		}
-		s.metrics.SensorTemperature.
-			WithLabelValues(reading.Name, reading.Key, reading.Type).
-			Set(*reading.Quantity)
-		count++
-	})
+	readings := s.reader.ReadTemperatures()
 
 	s.metrics.ParseDuration.Observe(time.Since(parseStart).Seconds())
+	s.metrics.ParsedSensors.Set(float64(len(readings)))
 
-	if err != nil {
-		return fmt.Errorf("parse: %w", err)
+	for _, rd := range readings {
+		s.metrics.SensorTemperature.
+			WithLabelValues(rd.Desc, rd.Key, rd.Type).
+			Set(float64(rd.Value))
 	}
 
-	s.metrics.ParsedSensors.Set(count)
 	return nil
 }
