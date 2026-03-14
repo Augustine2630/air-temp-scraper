@@ -42,16 +42,22 @@ fi
 BINARY_NAME="temp-scraper_darwin_${ARCH}"
 log "Detected macOS/$ARCH, will download $BINARY_NAME"
 
-# ── Check .zprofile for required vars ────────────────────────────────────────
+# ── Get environment variables from .zprofile or use defaults ─────────────────
 
-log "Checking ~/.zprofile for TEMP_SCRAPER_PORT..."
-if ! grep -q "TEMP_SCRAPER_PORT" ~/.zprofile; then
-    error "TEMP_SCRAPER_PORT not found in ~/.zprofile"
+PORT="${1:-9100}"
+INTERVAL="${2:-30s}"
+
+log "Reading env vars (defaults: PORT=$PORT, INTERVAL=$INTERVAL)..."
+if [ -f ~/.zprofile ]; then
+    if grep -q "TEMP_SCRAPER_PORT" ~/.zprofile; then
+        PORT=$(grep "TEMP_SCRAPER_PORT" ~/.zprofile | cut -d'=' -f2 | tr -d '"' | tr -d "'")
+        success "Found TEMP_SCRAPER_PORT=$PORT in ~/.zprofile"
+    fi
+    if grep -q "TEMP_SCRAPER_INTERVAL" ~/.zprofile; then
+        INTERVAL=$(grep "TEMP_SCRAPER_INTERVAL" ~/.zprofile | cut -d'=' -f2 | tr -d '"' | tr -d "'")
+        success "Found TEMP_SCRAPER_INTERVAL=$INTERVAL in ~/.zprofile"
+    fi
 fi
-if ! grep -q "TEMP_SCRAPER_INTERVAL" ~/.zprofile; then
-    log "TEMP_SCRAPER_INTERVAL not in ~/.zprofile, will use default 30s"
-fi
-success "Environment variables found in ~/.zprofile"
 
 # ── Download latest release ────────────────────────────────────────────────────
 
@@ -107,7 +113,7 @@ PLIST_DIR="$HOME/Library/LaunchAgents"
 PLIST_FILE="$PLIST_DIR/com.local.$SERVICE_NAME.plist"
 mkdir -p "$PLIST_DIR"
 
-log "Creating launchd service (inherits env from ~/.zprofile)..."
+log "Creating launchd service..."
 
 cat > "$PLIST_FILE" <<EOFPLIST
 <?xml version="1.0" encoding="UTF-8"?>
@@ -124,6 +130,14 @@ cat > "$PLIST_FILE" <<EOFPLIST
 
     <key>WorkingDirectory</key>
     <string>$INSTALL_DIR</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>TEMP_SCRAPER_PORT</key>
+        <string>$PORT</string>
+        <key>TEMP_SCRAPER_INTERVAL</key>
+        <string>$INTERVAL</string>
+    </dict>
 
     <key>StandardOutPath</key>
     <string>$LOG_DIR/${SERVICE_NAME}.log</string>
@@ -167,15 +181,6 @@ else
     error "Service failed to start. Check: launchctl list | grep $SERVICE_NAME"
 fi
 
-# ── Get port from .zprofile and test metrics endpoint ──────────────────────────
-
-log "Reading TEMP_SCRAPER_PORT from ~/.zprofile..."
-PORT=$(grep "TEMP_SCRAPER_PORT" ~/.zprofile | cut -d'=' -f2 | tr -d '"' | tr -d "'")
-
-if [ -z "$PORT" ]; then
-    error "Could not read TEMP_SCRAPER_PORT from ~/.zprofile"
-fi
-
 log "Testing metrics endpoint (http://localhost:$PORT/metrics)..."
 sleep 2
 
@@ -206,13 +211,14 @@ echo ""
 echo "Service Details:"
 echo "  Binary:     $BINARY_PATH"
 echo "  Config:     $PLIST_FILE"
-echo "  Env:        Inherited from ~/.zprofile"
 echo "  Port:       $PORT"
+echo "  Interval:   $INTERVAL"
 echo "  Metrics:    http://localhost:$PORT/metrics"
 echo ""
 echo "To change port or interval:"
-echo "  1. Edit ~/.zprofile"
-echo "  2. Change TEMP_SCRAPER_PORT or TEMP_SCRAPER_INTERVAL"
+echo "  1. Edit the plist:"
+echo "     nano $PLIST_FILE"
+echo "  2. Update TEMP_SCRAPER_PORT or TEMP_SCRAPER_INTERVAL"
 echo "  3. Reload service:"
 echo "     launchctl unload $PLIST_FILE"
 echo "     launchctl load $PLIST_FILE"
